@@ -108,6 +108,32 @@ public class JavaProgram {
 
 import ex3.User;
 
+import java.util.Arrays;
+import java.util.Collections;
+
+
+interface Mp3Player {
+    void play();
+    void stop();
+
+    // default method / defender method - Java 8
+    default void playOneMinute() {
+    }
+}
+
+class IPod implements Mp3Player {
+    @Override
+    public void play() {
+
+    }
+
+    @Override
+    public void stop() {
+
+    }
+}
+
+
 public class JavaProgram {
     public static void main(String[] args) {
         // User user = new User("Tom", "Suwon", 42, 100);
@@ -115,6 +141,21 @@ public class JavaProgram {
         // User user = new User("Suwon", "Tom", 42, 100);
 
         User user = new User("Tom");
+    }
+}
+
+class Car {
+    private String name;
+    public Car(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
 
