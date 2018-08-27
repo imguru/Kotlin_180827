@@ -10,7 +10,9 @@ package ex3
 //      Module   - prog.jar
 //      Module   - mylib.jar
 
-// Default Value 기능을 제공합니다. - @JvmOverloads
+// 1. Default Value 기능을 제공합니다.
+// 2. @JvmOverloads 어노테이션을 생성자에 지정하면
+//    생성자 오버로딩 코드를 자동으로 생성해줍니다.
 
 class User
 @JvmOverloads
