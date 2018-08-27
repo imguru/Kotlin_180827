@@ -157,6 +157,28 @@ fun main(args: Array<String>) {
 }
 */
 
+// 7. 기본 연산자
+fun main(args: Array<String>) {
+    // 2진수 리터럴 문법
+    val n = 0b1100
+    println(n)
+
+    // 비트 연산자
+    // <<, >>(산술 시프트), >>>(논리 시프트)
+    // shl, shr, ushr
+    println(n shl 1)
+    println(n shr 1)
+    println(n ushr 1)
+
+    // &, |, ^, ~
+    // and, or, xor, inv
+    println(n and 0b100)
+    println(n or 0b100)
+    println(n xor 0b100)
+    println(n.inv())
+}
+
+
 
 
 
