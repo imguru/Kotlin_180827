@@ -192,9 +192,25 @@ fun main(args: Array<String>) {
 //  : 다른 모듈이라고 하더라도 같은 패키지 이름을 가지면,
 //    접근이 가능한 문제가 있다.
 
-//   private - internal - protected - public
+//  private - internal - protected - public
 //  internal: 같은 모듈안에서만 접근이 가능하다
 //  protected: 오직 자식 클래스를 통해서만 접근이 가능하다.
+
+// default: public
+// : 이제는 하나의 파일 안에 여러개의 public class를 두는 것이 가능합니다.
+class Sample1
+class Sample2
+
+// internal: 같은 모듈에서 접근하는 것이 가능합니다.
+// private: 같은 파일에서 접근하는 것이 가능하다.
+private class Foo
+
+// 위의 접근 레벨 지정은 전역 함수에서도 동일하게 동작합니다.
+private fun add(a: Int, b: Int): Int {
+    return a + b
+}
+
+
 
 
 
