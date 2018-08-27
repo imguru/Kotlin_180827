@@ -3,6 +3,7 @@ package ex2
 import ex1.User
 import java.util.*
 
+
 // Kotlin 언어 특징
 //  * 간결함
 //    : '보일러플레이트'가 적어졌다.

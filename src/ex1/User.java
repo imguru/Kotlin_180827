@@ -16,9 +16,16 @@ public class User {
         return String.format("User(%s,%d)", name, age);
     }
 
+    public static void foo() {
+        System.out.println("foo");
+    }
+
     public static void main(String[] args) {
         UserKt user = new UserKt("Tom", 42);
         System.out.println(user);
+
+        // int n;
+        // System.out.printf("n: %d\n", n);
     }
 }
 
