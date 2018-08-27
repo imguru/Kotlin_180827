@@ -157,6 +157,7 @@ fun main(args: Array<String>) {
 }
 */
 
+/*
 // 7. 기본 연산자
 fun main(args: Array<String>) {
     // 2진수 리터럴 문법
@@ -177,8 +178,23 @@ fun main(args: Array<String>) {
     println(n xor 0b100)
     println(n.inv())
 }
+*/
 
+// 8. 접근 지정자가 변경되었습니다.
+//  public, package-default, protected, private
 
+// 접근 레벨이 높은 순서부터 나열해보세요.
+//   private - package - protected - public (O)
+// protected 문제점
+//  : 자식 클래스를 통해서 접근 가능한 것 뿐 아니라 같은 패키지 내에서는
+//    직접 접근이 가능하다.
+// package 문제점
+//  : 다른 모듈이라고 하더라도 같은 패키지 이름을 가지면,
+//    접근이 가능한 문제가 있다.
+
+//   private - internal - protected - public
+//  internal: 같은 모듈안에서만 접근이 가능하다
+//  protected: 오직 자식 클래스를 통해서만 접근이 가능하다.
 
 
 
