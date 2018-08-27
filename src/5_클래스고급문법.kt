@@ -60,6 +60,7 @@ class Person {
 // 코틀린의 인터페이스는 프로퍼티도 정의할 수 있습니다.
 interface Clickable {
     val name: String
+        get() = "Hello"
     // val: getter
     // var: getter + setter
 
@@ -71,6 +72,7 @@ interface Clickable {
 }
 
 interface Focusable {
+    val name: String
     fun showOff() {
         println("I'm Focusable")
     }
@@ -82,7 +84,8 @@ class Button : Clickable, Focusable {
     // 부모(클래스 또는 인터페이스)가 정의한 프로퍼티를 재정의하는 방법
     override val name: String
         get() {
-            return "Button"
+            return super<Clickable>.name
+            // return "Button"
         }
 
     override fun click() {
@@ -92,10 +95,11 @@ class Button : Clickable, Focusable {
     override fun showOff() {
         // super<Clickable>.showOff()
         // super<Focusable>.showOff()
-        println("I'm Button")
+        // println("I'm Button")
     }
 }
 */
+
 
 
 // Effective Java
