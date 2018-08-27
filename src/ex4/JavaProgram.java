@@ -106,6 +106,7 @@ public class JavaProgram {
 }
 */
 
+/*
 import ex3.User;
 
 import java.util.Arrays;
@@ -158,10 +159,59 @@ class Car {
         this.name = name;
     }
 }
+*/
+
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
 
+// 직렬화 / 역직렬화
+// 객체를 ByteStream 변경  - 직렬화
+// ByteStream으로부터 객체로 복원 - 역직렬화
 
+interface State extends Serializable {
 
+}
+
+interface View {
+    State getCurrentState();
+    void restoreState(State state);
+}
+
+// 내부 클래스(Inner class)는 생성 될 때, 바깥 클래스(Outer class)에 대한 암묵적인
+// 참조를 가진다.
+//  => 많은 문제의 원인
+//     (메모리 누수, 직렬화 이슈)
+class Button implements View {
+    // class ButtonState: Inner Class
+    // static class ButtonState: Nested Class
+    class ButtonState implements State {
+        // 다양한 상태값
+        // x, y, width, height
+    }
+
+    @Override
+    public State getCurrentState() {
+        return new ButtonState();
+    }
+
+    @Override
+    public void restoreState(State state) {
+
+    }
+}
+
+public class JavaProgram {
+    public static void main(String[] args) throws IOException {
+        Button button = new Button();
+        FileOutputStream fos = new FileOutputStream("state.out");
+        ObjectOutputStream oos = new ObjectOutputStream(fos);
+
+        oos.writeObject(button.getCurrentState());
+    }
+}
 
 
 
