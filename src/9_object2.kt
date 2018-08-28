@@ -146,6 +146,7 @@ fun main(args: Array<String>) {
 }
 */
 
+/*
 // JSON
 //  { "name": "Tom", "age": 42 }
 
@@ -180,8 +181,61 @@ fun main(args: Array<String>) {
 //    val person = Person.fromMap(map)
 //    println(person)
 }
+*/
 
+// 3. 무명 객체(Anonymous Object)
+interface MouseAdapter {
+    fun mouseClick()
+    fun mouseEntered()
+}
 
+/*
+class Window {
+    lateinit var mouseListener: MouseAdapter
+    // lateinit var
+    //  : var를 나중에 초기화 하겠다는 의미로 사용됩니다.
+    //    만약 초기화하지 않고 사용할 경우 예외가 발생합니다.
+
+    fun click() {
+        mouseListener.mouseClick()
+    }
+
+    fun enter() {
+        mouseListener.mouseEntered()
+    }
+}
+*/
+
+class Window {
+    var mouseListener: MouseAdapter? = null
+    // lateinit var
+    //  : var를 나중에 초기화 하겠다는 의미로 사용됩니다.
+    //    만약 초기화하지 않고 사용할 경우 예외가 발생합니다.
+
+    fun click() {
+        mouseListener?.mouseClick()
+    }
+
+    fun enter() {
+        mouseListener?.mouseEntered()
+    }
+}
+
+fun main(args: Array<String>) {
+    val window = Window()
+//    window.mouseListener = object : MouseAdapter {
+//        override fun mouseClick() {
+//            println("mouse clicked")
+//        }
+//
+//        override fun mouseEntered() {
+//            println("mouse entered")
+//        }
+//    }
+
+    window.click()
+    window.enter()
+}
 
 
 
