@@ -67,6 +67,8 @@ class Button {
     fun click() {
         println("Button click")
         // listener가 null이 아니면 onClick을 호출한다.
+        // listener?.onClick(this)
+
         listener?.onClick(this)
     }
 }
