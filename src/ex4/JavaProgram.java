@@ -185,6 +185,9 @@ interface View {
 //  => 많은 문제의 원인
 //     (메모리 누수, 직렬화 이슈)
 class Button implements View {
+
+
+
     // class ButtonState: Inner Class
     // static class ButtonState: Nested Class
     class ButtonState implements State {
