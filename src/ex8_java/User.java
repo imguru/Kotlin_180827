@@ -1,6 +1,15 @@
 package ex8_java;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+
+
+class Hello {
+    static final String message = "World";
+}
+
+
 
 public class User implements Cloneable {
     private String name;
@@ -52,6 +61,8 @@ public class User implements Cloneable {
                 Objects.equals(name, user.name);
     }
 
+
+
     @Override
     public int hashCode() {
         return Objects.hash(name, age);
@@ -87,6 +98,11 @@ public class User implements Cloneable {
         System.out.println(u1);
         System.out.println(u2);
 
+        List<String> names = new ArrayList<String>();
+        names.add("Tom");
+        names.add("Bob");
+
+        System.out.println(names.get(0));
 
     }
 }
