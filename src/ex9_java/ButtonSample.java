@@ -49,6 +49,8 @@ public class ButtonSample {
 
         Dialog dialog = new Dialog();
 
+        // Java 8 이전에는 반드시 해당 변수가 final 이어야 합니다.
+        // Java 8 에서는 암묵적으로 접근이 가능하다.
         button.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(Button button) {
