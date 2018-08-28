@@ -44,9 +44,6 @@ fun main(args: Array<String>) {
     println(User.TAG)
     User.foo()
 
-
-
-
     println("Program started")
     Cursor.move(10, 20)
     println(Cursor.name)
