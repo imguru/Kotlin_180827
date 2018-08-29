@@ -64,8 +64,13 @@ fun <P1, P2, P3, R> ((P1, P2, P3) -> R).curried(): (P1) -> (P2) -> (P3) -> R = {
     }
 }
 
+fun xsum(a: Int, b: Int, c: Int): Int {
+    return a + b + c
+}
+
 
 fun main(args: Array<String>) {
+    ::xsum.curried()(10)(20)(30)
     /*
     println(sum(10, 20))
 
@@ -102,13 +107,10 @@ fun main(args: Array<String>) {
     //           재사용 가능하게 하는 방법
     val logger = ::log.curried()(Level.INFO)(System.out)
     compute(logger)
-
-
-
+    
     // log(Level.WARN, System.out, message)
     // -> val logger: (String) -> Unit = log(Level.WARN)(System.out)
     //
-
 
     // compute(logger)
 }
