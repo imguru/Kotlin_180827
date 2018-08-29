@@ -5,8 +5,9 @@ package ex15
 //  정의: 함수의 객체의 참조를 인자로 전달받거나,
 //       함수의 참조를 반환하는 함수
 
-// 고차 함수의 장점
-//  1.
+// 고차 함수의 장점 - 함수의 인자를 받는 경우
+//  1. 다양한 시나리오에서 동작하는 함수의 코드 중복을 없앨 수 있다.
+//  2. 함수의 재사용성을 올린다.
 
 // Kotlin's Collection
 // 1. listOf, mapOf, setOf
@@ -109,6 +110,7 @@ fun main(args: Array<String>) {
 }
 */
 
+/*
 //  2) Kotlin - 함수 기반의 정책 전달
 interface Predicate {
     // (Int) -> Boolean
@@ -163,6 +165,57 @@ fun main(args: Array<String>) {
     // 5. 마지막 인자로 전달될 경우, 함수의 외부로 블록을 빼는 것도 가능합니다.
     result = filter(ints) { it % 2 == 0 }
 }
+*/
+
+// 람다가 무명 객체보다 사용하기 좋다.
+// 1. 보일러플레이트가 없다.
+// 2. 성능이 좋다.
+// 3. this를 직관적으로 사용할 수 있다.
+
+interface OnClickListener {
+    fun onClick()
+}
+
+
+
+class Button {
+    var onClickListener: OnClickListener? = null
+    var onClick: (() -> Unit)? = null
+
+    fun click() {
+        onClickListener?.onClick()
+        onClick?.invoke()
+    }
+}
+
+class Intent(context: MainActivity, clazz: Class<*>)
+
+class UserActivity
+class MainActivity {
+    val nextButton = Button()
+
+    fun onCreate() {
+        nextButton.onClick = {
+            val intent = Intent(this, UserActivity::class.java)
+            // startActivity(intent)
+        }
+
+
+
+        nextButton.onClickListener = object: OnClickListener {
+            override fun onClick() {
+                // MainActivity.this
+                val intent = Intent(this@MainActivity,
+                        UserActivity::class.java)
+
+
+                // val intent = Intent(this, UserActivity.class)
+                // startActivity(intent)
+            }
+        }
+    }
+}
+
 
 
 
