@@ -20,6 +20,8 @@ class Dialog implements OnClickListener {
 }
 */
 
+import java.util.List;
+
 class Dialog {
     public void close() {
         System.out.println("Dialog close");
@@ -47,6 +49,7 @@ public class ButtonSample {
         Button button = new Button();
         Button button2 = new Button();
 
+        List<String> s;
         Dialog dialog = new Dialog();
 
         // Java 8 이전에는 반드시 해당 변수가 final 이어야 합니다.
