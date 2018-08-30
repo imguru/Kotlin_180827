@@ -225,26 +225,22 @@ fun main(args: Array<String>) {
 
 }
 */
+// Sequence API 한계
+//  1. 요소의 개수가 적을 경우, Stream API보다
+//     빠르게 동작한다.
+//     하지만, 많은 데이터를 처리할 수 없다.
+//  2. 병렬화 기능이 제공되지 않는다.
 
+// Stream API 동작 방식
+//  1. 메모리 한꺼번에 올려 처리하는 것이 아니라
+//     순회해서 하나씩 처리한다.
+//  2. 쉽게 병렬화가 가능하다.
+//    stream()      -> Single Thread
+// parallelStream() -> Multi Thread
 fun main(args: Array<String>) {
-
-
-    // Sequence API 한계
-    //  1. 요소의 개수가 적을 경우, Stream API보다
-    //     빠르게 동작한다.
-    //     하지만, 많은 데이터를 처리할 수 없다.
-    //  2. 병렬화 기능이 제공되지 않는다.
-
-    // Stream API 동작 방식
-    //  1. 메모리 한꺼번에 올려 처리하는 것이 아니라
-    //     순회해서 하나씩 처리한다.
-    //  2. 쉽게 병렬화가 가능하다.
-    //    stream()      -> Single Thread
-    // parallelStream() -> Multi Thread
-
     val cities = listOf("A", "AA", "BBB", "CCCC", "DDD", "EEEE")
 
-    val result = cities.stream()
+    val result = cities
             .map(String::length).filter { it % 2 == 0 }.toList()
 
     println(result)
