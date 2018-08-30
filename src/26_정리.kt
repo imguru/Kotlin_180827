@@ -8,7 +8,6 @@ import ex1.User as User1
 // class A { fun go(); }
 // class C { fun go(); }
 
-
 open class Car
 
 class Sedan : Car() {

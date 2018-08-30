@@ -2,6 +2,7 @@ package ex25
 
 import java.io.File
 import java.util.*
+import java.util.stream.Collectors.toList
 import kotlin.streams.toList
 
 // 1. 조건 확인 함수
@@ -238,10 +239,10 @@ fun main(args: Array<String>) {
 //    stream()      -> Single Thread
 // parallelStream() -> Multi Thread
 fun main(args: Array<String>) {
-    val cities = listOf("A", "AA", "BBB", "CCCC", "DDD", "EEEE")
+    val cities = mutableListOf("A", "AA", "BBB", "CCCC", "DDD", "EEEE")
 
     val result = cities
-            .map(String::length).filter { it % 2 == 0 }.toList()
+            .map(String::length).filter { it % 2 == 0 }// .collect(toList())
 
     println(result)
 }
