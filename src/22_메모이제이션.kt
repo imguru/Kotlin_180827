@@ -47,8 +47,11 @@ class FibTests {
 }
 */
 
+// 최적화
+//  명언: 최적화 하지 마라. 최적화 하지 마라. 최적화 하지 마라.
 
-class User(val name: String, val age: Int)
+
+data class User(val name: String, val age: Int)
 
 fun toJson(user: User): String {
     println("toJson")
@@ -74,6 +77,8 @@ fun main(args: Array<String>) {
             User("Tom", 42)
     )
 
+    //  : Any.hashCode / Any.equals
+    // Map<User, String>
     val toJson = ::toJson.memoized()
 
     for (e in users) {
