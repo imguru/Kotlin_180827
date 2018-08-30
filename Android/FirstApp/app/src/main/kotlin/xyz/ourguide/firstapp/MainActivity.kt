@@ -3,7 +3,6 @@ package xyz.ourguide.firstapp
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
-import android.widget.Button
 import kotlinx.android.synthetic.main.activity_main.*
 
 // Kotlin 에서는 더 이상 findViewById를 사용하지 않습니다.
@@ -24,12 +23,36 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        helloButton.setOnClickListener {
-            Log.i(TAG, "Clicked - KTX")
-        }
 
     }
 }
+
+
+/*
+class MainActivity : AppCompatActivity() {
+    // private static final String TAG = MainActivity.class.simpleName()
+    companion object {
+        val TAG: String = MainActivity::class.java.simpleName
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        helloButton.setOnClickListener {
+            Log.i(TAG, "Clicked - KTX")
+        }
+    }
+}
+*/
+
+
+
+
+
+
+
+
 
 
 /*
