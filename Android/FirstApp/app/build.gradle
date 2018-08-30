@@ -3,6 +3,9 @@ apply plugin: 'com.android.application'
 // 2.
 apply plugin: 'kotlin-android'
 
+// !!
+apply plugin: 'kotlin-android-extensions'
+
 android {
     compileSdkVersion 27
     defaultConfig {

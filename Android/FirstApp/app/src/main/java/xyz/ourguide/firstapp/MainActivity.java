@@ -18,13 +18,7 @@ import android.os.Bundle;
 // 2. 모듈(앱) 수준 build.gradle
 //    apply plugin: 'kotlin-android'
 
-
-
-
-
-
-
-
+/*
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -33,3 +27,20 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 }
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
