@@ -24,7 +24,7 @@ inline fun List<Person?>.forEach2(action: (Person?) -> Unit) {
     }
 }
 
-// 코틀린은 람다를 함수로 취급하지 않습니다.
+// 코틀린은 람다를 '함수'로 취급하지 않습니다.
 // : 함수(호출) - 반환(return)
 
 // * inline 함수에서는 람다가 호출한 함수의 컨텍스트에서 수행되기 때문에
@@ -79,4 +79,23 @@ fun main(args: Array<String>) {
     val people = listOf(Person("Alice"), Person("Alice"))
     lookForAlice(people)
 }
+
+// https://medium.com/@joongwon/kotlin-kotlin-%ED%82%A4%EC%9B%8C%EB%93%9C-%EB%B0%8F-%EC%97%B0%EC%82%B0%EC%9E%90-%ED%95%B4%EB%B6%80-1-hard-keywords-3062f5fe2d11
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
