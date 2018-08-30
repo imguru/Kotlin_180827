@@ -2,6 +2,7 @@ package ex25
 
 import java.io.File
 import java.util.*
+import kotlin.streams.toList
 
 // 1. 조건 확인 함수
 //  : 코틀린은 예외 처리가 강제되지 않습니다.
@@ -243,10 +244,8 @@ fun main(args: Array<String>) {
 
     val cities = listOf("A", "AA", "BBB", "CCCC", "DDD", "EEEE")
 
-    val result = cities.map(String::length)
-            .flatMap { 1..it }
-            .filter { it % 2 == 0 }
-            .sum()
+    val result = cities.stream()
+            .map(String::length).filter { it % 2 == 0 }.toList()
 
     println(result)
 }
