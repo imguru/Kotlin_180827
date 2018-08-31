@@ -1,7 +1,11 @@
 package xyz.ourguide.hubclient
 
+import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.customtabs.CustomTabsIntent
+import kotlinx.android.synthetic.main.activity_sign_in.*
+import xyz.ourguide.hubclient.common.GITHUB_CLIENT_ID
 
 
 // 1. github.com - Social(OAuth) Login
@@ -18,11 +22,24 @@ class SignInActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
 
+        signInButton.setOnClickListener { loginWithGithub() }
+    }
+
+    private fun loginWithGithub() {
         // Github OAuth Login URL
         // : https://github.com/login/oauth/authorize?client_id=<CLIENT_ID>
 
+        val uri = Uri.Builder().apply {
+            scheme("https")
+            authority("github.com")
+            appendPath("login")
+            appendPath("oauth")
+            appendPath("authorize")
+            appendQueryParameter("client_id", GITHUB_CLIENT_ID)
+        }.build()
 
-
+        val intent = CustomTabsIntent.Builder().build()
+        intent.launchUrl(this, uri)
     }
 }
 
