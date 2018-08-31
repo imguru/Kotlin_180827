@@ -8,6 +8,7 @@ import android.support.customtabs.CustomTabsIntent
 import kotlinx.android.synthetic.main.activity_sign_in.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
+import org.jetbrains.anko.toast
 import xyz.ourguide.hubclient.common.GITHUB_CLIENT_ID
 
 
@@ -17,6 +18,7 @@ import xyz.ourguide.hubclient.common.GITHUB_CLIENT_ID
 
 // 2. api.github.com - Login
 //   => Access Token 을 받습니다.
+//   => Retrofit + OkHttp + Gson
 
 // 3. api.github.com
 //   => 요청을 할 때마다 AccessToken을 HTTP 헤더에 포함해서 요청을 해야 합니다.
@@ -32,6 +34,22 @@ class SignInActivity : AppCompatActivity(), AnkoLogger {
     override fun onNewIntent(intent: Intent?) {
         // github.com이 로그인에 성공하였을 때, 주는 code 값을 읽어야 합니다.
         info("onNewIntent")
+        // toast("onNewIntent")
+
+        if (intent == null)
+            return
+
+        // hubclient://authorize?code=XXXXXXX
+        val uri: Uri? = intent.data
+        val code: String? = uri?.getQueryParameter("code")
+
+        if (code == null) {
+            toast("code가 존재하지 않습니다.")
+            return
+        }
+
+        toast("code: $code")
+        // getAccessToken(code)
     }
 
     private fun loginWithGithub() {
