@@ -33,6 +33,9 @@ import xyz.ourguide.hubclient.common.GITHUB_CLIENT_SECRET
 
 // 3. api.github.com
 //   => 요청을 할 때마다 AccessToken을 HTTP 헤더에 포함해서 요청을 해야 합니다.
+
+
+
 class SignInActivity : AppCompatActivity(), AnkoLogger {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,7 +77,6 @@ class SignInActivity : AppCompatActivity(), AnkoLogger {
         // call.execute() // 동기 - 메인 스레드에서 사용할 경우 예외가 발생한다.
         //                         NetworkOnMainThread
         // call.enqueue() // 비동기
-
         call.enqueue(object : Callback<GithubAccessToken> {
             override fun onFailure(call: Call<GithubAccessToken>,
                                    t: Throwable) {
@@ -85,7 +87,7 @@ class SignInActivity : AppCompatActivity(), AnkoLogger {
                                     response: Response<GithubAccessToken>) {
                 val accessToken = response.body()
                 if (response.isSuccessful && accessToken != null) {
-                    toast(accessToken.accessToken)
+                    info("${accessToken.tokenType} ${accessToken.accessToken}")
                 }
             }
         })
