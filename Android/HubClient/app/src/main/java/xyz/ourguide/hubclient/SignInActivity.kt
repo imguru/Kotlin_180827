@@ -18,6 +18,10 @@ import xyz.ourguide.hubclient.common.GITHUB_CLIENT_ID
 
 // 2. github.com - Login
 //   => Access Token 을 받습니다.
+//      POST - github.com/login/oauth/access_token
+//             client_id / client_secret / code
+//      POSTMAN
+
 //   => Retrofit + OkHttp + Gson
 
 // 3. api.github.com
@@ -48,7 +52,7 @@ class SignInActivity : AppCompatActivity(), AnkoLogger {
             return
         }
 
-        toast("code: $code")
+        info("code: $code")
         // getAccessToken(code)
     }
 
