@@ -1,0 +1,7 @@
+ext {
+    kotlin_version = '1.2.41'
+    minSdkVersion = 19
+    targetSdkVersion = 27
+
+    androidPluginVersion = '3.1.2'
+}

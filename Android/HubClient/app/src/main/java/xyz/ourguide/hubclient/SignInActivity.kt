@@ -15,6 +15,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import xyz.ourguide.api.GithubAccessToken
 import xyz.ourguide.api.authApi
+import xyz.ourguide.api.githubApi
 import xyz.ourguide.api.updateToken
 import xyz.ourguide.hubclient.common.GITHUB_CLIENT_ID
 import xyz.ourguide.hubclient.common.GITHUB_CLIENT_SECRET
@@ -42,6 +43,10 @@ class SignInActivity : AppCompatActivity(), AnkoLogger {
         setContentView(R.layout.activity_sign_in)
 
         signInButton.setOnClickListener { loginWithGithub() }
+
+        searchButton.setOnClickListener {
+            search()
+        }
     }
 
     // Activity가 Intent를 받았을 때 호출되는 함수
@@ -66,6 +71,28 @@ class SignInActivity : AppCompatActivity(), AnkoLogger {
         getAccessToken(code)
     }
 
+    private fun search() {
+        // EditText에서 데이터를 읽어와서 처리하는 로직
+        val text = searchEditText.text.toString()
+        if (text.isEmpty()) {
+            return
+        }
+
+        // EditText의 내용이 변경될 때마다, 요청을 날리고 싶다.
+        githubApi(this)
+                .searchRepositories(text)
+                .enqueue {
+                    val response = it.body()
+                    if (it.isSuccessful && response != null) {
+                        val items = response.items
+                        for (e in items) {
+                            info(e)
+                        }
+                    }
+                }
+
+    }
+
     private fun showError(throwable: Throwable) {
         longToast(throwable.message ?: "error")
     }
@@ -87,6 +114,7 @@ class SignInActivity : AppCompatActivity(), AnkoLogger {
             }
         })
         */
+
 
         call.enqueue { response ->
             val accessToken = response.body()
@@ -133,7 +161,7 @@ class SignInActivity : AppCompatActivity(), AnkoLogger {
     }
 }
 
-fun <T> Call<T>.enqueue(onResponse: (Response<T>) -> Unit, onFail: ((Throwable) -> Unit)? = null) {
+fun <T> Call<T>.enqueue(onFail: ((Throwable) -> Unit)? = null, onResponse: (Response<T>) -> Unit) {
     enqueue(object : Callback<T> {
         override fun onFailure(call: Call<T>, t: Throwable) {
             onFail?.invoke(t)
@@ -145,6 +173,8 @@ fun <T> Call<T>.enqueue(onResponse: (Response<T>) -> Unit, onFail: ((Throwable) 
     })
 }
 
+/*
 fun <T> Call<T>.enqueue(onResponse: (Response<T>) -> Unit) {
     enqueue(onResponse, null)
 }
+*/
