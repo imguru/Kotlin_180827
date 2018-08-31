@@ -1,16 +1,11 @@
 package xyz.ourguide.ankoapp
 
 import android.app.Activity
-import android.app.AlertDialog
-import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.support.v7.app.AppCompatActivity
+import android.text.InputType.*
 import android.widget.Toast
-import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.*
-import org.jetbrains.anko.appcompat.v7.Appcompat
-import java.util.*
 
 // Anko
 //  : Jetbrains 에서 직접 제작하여 배포하는 안드로이드 코틀린 라이브러리
@@ -129,6 +124,7 @@ class MainActivity : AppCompatActivity() {
 }
 */
 
+/*
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -146,16 +142,62 @@ class MainActivity : AppCompatActivity() {
                     "age" to 42
             )
             startActivity(intent)
-
         }
 
     }
 }
+*/
 
-class SubActivity : AppCompatActivity() {
+// Anko Layout
+// 1. 코드를 이용해서 뷰를 구성하는 것은 어려운 일입니다.
+// 2. XML로 정의된 뷰를 사용할 경우, 파싱에 대한 비용이 소모됩니다.
+// 3. minSdkVersion 에 따라서 의존하는 라이브러리가 달라집니다.
+
+// 문제점
+// 1. Preview 가 제공됩니다. 하지만 불편합니다.
+class MainActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        // setContentView(R.layout.activity_main)
+
+        MainActivityUI().setContentView(this)
+    }
+}
+
+class MainActivityUI : AnkoComponent<MainActivity> {
+    override fun createView(ui: AnkoContext<MainActivity>) = ui.apply {
+        verticalLayout {
+            textView("Enter Login Email Address")
+            padding = dip(8)
+
+            editText {
+                hint = "이메일"
+                inputType = TYPE_CLASS_TEXT or TYPE_TEXT_VARIATION_EMAIL_ADDRESS
+            }
+
+            editText {
+                hint = "Password"
+                inputType = TYPE_CLASS_TEXT or TYPE_TEXT_VARIATION_PASSWORD
+            }
+
+            button("Submit")
+        }
+    }.view
+}
+
+
+
+
+
+
+
+
+
+class SubActivity : AppCompatActivity(), AnkoLogger {
     companion object {
         // const val TAG: String = "SubActivity"
-        val TAG: String = SubActivity::class.java.simpleName
+        // val TAG: String = SubActivity::class.java.simpleName
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -163,7 +205,8 @@ class SubActivity : AppCompatActivity() {
         setContentView(R.layout.activity_sub)
 
         val name = intent.getStringExtra("name")
-        Log.i(TAG, "name: $name")
+        // Log.i(TAG, "name: $name")
+        info("name: $name")
     }
 }
 
