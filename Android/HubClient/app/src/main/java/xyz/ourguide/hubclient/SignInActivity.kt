@@ -8,8 +8,15 @@ import android.support.customtabs.CustomTabsIntent
 import kotlinx.android.synthetic.main.activity_sign_in.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
+import org.jetbrains.anko.longToast
 import org.jetbrains.anko.toast
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import xyz.ourguide.api.GithubAccessToken
+import xyz.ourguide.api.authApi
 import xyz.ourguide.hubclient.common.GITHUB_CLIENT_ID
+import xyz.ourguide.hubclient.common.GITHUB_CLIENT_SECRET
 
 
 // 1. github.com - Social(OAuth) Login
@@ -53,7 +60,35 @@ class SignInActivity : AppCompatActivity(), AnkoLogger {
         }
 
         info("code: $code")
-        // getAccessToken(code)
+        getAccessToken(code)
+    }
+
+    private fun showError(throwable: Throwable) {
+        longToast(throwable.message ?: "error")
+    }
+
+    private fun getAccessToken(code: String) {
+        val call = authApi.getAccessToken(GITHUB_CLIENT_ID,
+                GITHUB_CLIENT_SECRET, code)
+
+        // call.execute() // 동기 - 메인 스레드에서 사용할 경우 예외가 발생한다.
+        //                         NetworkOnMainThread
+        // call.enqueue() // 비동기
+
+        call.enqueue(object : Callback<GithubAccessToken> {
+            override fun onFailure(call: Call<GithubAccessToken>,
+                                   t: Throwable) {
+                showError(t)
+            }
+
+            override fun onResponse(call: Call<GithubAccessToken>,
+                                    response: Response<GithubAccessToken>) {
+                val accessToken = response.body()
+                if (response.isSuccessful && accessToken != null) {
+                    toast(accessToken.accessToken)
+                }
+            }
+        })
     }
 
     private fun loginWithGithub() {
