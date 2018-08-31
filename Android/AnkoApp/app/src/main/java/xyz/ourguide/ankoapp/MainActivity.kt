@@ -2,8 +2,10 @@ package xyz.ourguide.ankoapp
 
 import android.app.Activity
 import android.app.AlertDialog
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.*
@@ -32,6 +34,7 @@ fun Activity.showToast(message: String) {
     Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 }
 
+/*
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -115,18 +118,54 @@ class MainActivity : AppCompatActivity() {
             */
 
             val selections = listOf("미혼", "기혼", "이혼")
-            selector(title = "결혼 여부", items = selections) { _, index ->
+            selector(title = "결혼 여부", items = selections) { dialog, index ->
                 toast("선택 - ${selections[index]}")
             }
-            
+
         }
 
 
     }
 }
+*/
 
+class MainActivity : AppCompatActivity() {
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
 
+        helloButton.setOnClickListener {
+            // val intent = Intent(this, SubActivity::class.java)
+            // startActivity(intent)
+
+            // startActivity<SubActivity>()
+
+            val intent = intentFor<SubActivity>(
+                    "name" to "Tom",
+                    "age" to 42
+            )
+            startActivity(intent)
+
+        }
+
+    }
+}
+
+class SubActivity : AppCompatActivity() {
+    companion object {
+        // const val TAG: String = "SubActivity"
+        val TAG: String = SubActivity::class.java.simpleName
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_sub)
+
+        val name = intent.getStringExtra("name")
+        Log.i(TAG, "name: $name")
+    }
+}
 
 
 
