@@ -23,6 +23,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // Fragment 전환 하는 방법
+        val fragment = MainFragment()
+        supportFragmentManager.beginTransaction()
+                .add(R.id.mainFrame, fragment)
+                .commit()
 
     }
 }
