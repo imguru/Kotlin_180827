@@ -16,7 +16,7 @@ import xyz.ourguide.hubclient.common.GITHUB_CLIENT_ID
 //   => Web Browser
 //   => code 받습니다.
 
-// 2. api.github.com - Login
+// 2. github.com - Login
 //   => Access Token 을 받습니다.
 //   => Retrofit + OkHttp + Gson
 
