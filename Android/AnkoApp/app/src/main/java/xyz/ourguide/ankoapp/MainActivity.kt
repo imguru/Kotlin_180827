@@ -1,14 +1,13 @@
 package xyz.ourguide.ankoapp
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
-import org.jetbrains.anko.indeterminateProgressDialog
-import org.jetbrains.anko.longToast
-import org.jetbrains.anko.progressDialog
-import org.jetbrains.anko.toast
+import org.jetbrains.anko.*
+import org.jetbrains.anko.appcompat.v7.Appcompat
 import java.util.*
 
 // Anko
@@ -51,6 +50,7 @@ class MainActivity : AppCompatActivity() {
             //    setCancelable(false)
             // }
 
+            /*
             val progressDialog = progressDialog(title = "File downloading", message = "Plz wait") {
                 setCancelable(false)
             }
@@ -74,11 +74,52 @@ class MainActivity : AppCompatActivity() {
             }
 
             timer.scheduleAtFixedRate(timerTask, 0, 1000)
+            */
 
+            /*
+            val alert = AlertDialog.Builder(this).apply {
+                setTitle("Dialog Title")
+                setMessage("Hello, Kotlin")
+                setPositiveButton("OK") { _, _ ->
+                    toast("OK")
+                }
+            }.create()
+            alert.show()
+            */
+
+            // Android 현재 버전이 제공하는 라이브러리
+            /*
+            // alert(title = "Dialog Title", message = "Hello, Kotlin") {
+            alert(message = "Hello, Kotlin") {
+                positiveButton("Yes") { _ ->
+                    toast("Yes")
+                }
+
+                negativeButton("No") { _ ->
+                    toast("No")
+                }
+            }.show()
+            */
+
+            // Support Library Dialog를 사용하는 방법
+            /*
+            alert(Appcompat, message = "Hello, Kotlin") {
+                positiveButton("Yes") { _ ->
+                    toast("Yes")
+                }
+
+                negativeButton("No") { _ ->
+                    toast("No")
+                }
+            }.show()
+            */
+
+            val selections = listOf("미혼", "기혼", "이혼")
+            selector(title = "결혼 여부", items = selections) { _, index ->
+                toast("선택 - ${selections[index]}")
+            }
+            
         }
-
-
-
 
 
     }
