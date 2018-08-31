@@ -15,6 +15,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import xyz.ourguide.api.GithubAccessToken
 import xyz.ourguide.api.authApi
+import xyz.ourguide.api.updateToken
 import xyz.ourguide.hubclient.common.GITHUB_CLIENT_ID
 import xyz.ourguide.hubclient.common.GITHUB_CLIENT_SECRET
 
@@ -33,7 +34,6 @@ import xyz.ourguide.hubclient.common.GITHUB_CLIENT_SECRET
 
 // 3. api.github.com
 //   => 요청을 할 때마다 AccessToken을 HTTP 헤더에 포함해서 요청을 해야 합니다.
-
 
 
 class SignInActivity : AppCompatActivity(), AnkoLogger {
@@ -76,7 +76,27 @@ class SignInActivity : AppCompatActivity(), AnkoLogger {
 
         // call.execute() // 동기 - 메인 스레드에서 사용할 경우 예외가 발생한다.
         //                         NetworkOnMainThread
-        // call.enqueue() // 비동기
+        /*
+        call.enqueue({ error ->
+            showError(error)
+        }, { response ->
+            val accessToken = response.body()
+            if (response.isSuccessful && accessToken != null) {
+                info("${accessToken.tokenType} ${accessToken.accessToken}")
+                updateToken(this, accessToken.accessToken)
+            }
+        })
+        */
+
+        call.enqueue { response ->
+            val accessToken = response.body()
+            if (response.isSuccessful && accessToken != null) {
+                info("${accessToken.tokenType} ${accessToken.accessToken}")
+                updateToken(this, accessToken.accessToken)
+            }
+        }
+
+        /*
         call.enqueue(object : Callback<GithubAccessToken> {
             override fun onFailure(call: Call<GithubAccessToken>,
                                    t: Throwable) {
@@ -88,9 +108,11 @@ class SignInActivity : AppCompatActivity(), AnkoLogger {
                 val accessToken = response.body()
                 if (response.isSuccessful && accessToken != null) {
                     info("${accessToken.tokenType} ${accessToken.accessToken}")
+                    updateToken(this@SignInActivity, accessToken.accessToken)
                 }
             }
         })
+        */
     }
 
     private fun loginWithGithub() {
@@ -111,11 +133,18 @@ class SignInActivity : AppCompatActivity(), AnkoLogger {
     }
 }
 
+fun <T> Call<T>.enqueue(onResponse: (Response<T>) -> Unit, onFail: ((Throwable) -> Unit)? = null) {
+    enqueue(object : Callback<T> {
+        override fun onFailure(call: Call<T>, t: Throwable) {
+            onFail?.invoke(t)
+        }
 
+        override fun onResponse(call: Call<T>, response: Response<T>) {
+            onResponse(response)
+        }
+    })
+}
 
-
-
-
-
-
-
+fun <T> Call<T>.enqueue(onResponse: (Response<T>) -> Unit) {
+    enqueue(onResponse, null)
+}
