@@ -28,7 +28,7 @@
 
                 <data
                     android:host="authorize"
-                    android:scheme="simplegithub" />
+                    android:scheme="hubclient" />
             </intent-filter>
         </activity>
 

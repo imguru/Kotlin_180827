@@ -15,6 +15,7 @@ import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_search.*
 import kotlinx.android.synthetic.main.item_respositary.view.*
 import org.jetbrains.anko.startActivity
@@ -40,6 +41,7 @@ class SearchActivity : AppCompatActivity() {
     override fun onStop() {
         super.onStop()
         disposables.clear()
+        disposables.dispose()
 
         if (isFinishing) {
             viewDisposables.clear()
